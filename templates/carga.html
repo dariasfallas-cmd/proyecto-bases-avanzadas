@@ -2,19 +2,58 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Carga Inicial de Promociones</title>
+    <title>Gestion de Promociones</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f4f9; }
-        .card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); max-width: 500px; }
-        input[type="file"] { margin: 15px 0; }
-        button { background: #007bff; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; }
-        button:hover { background: #0056b3; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0; }
+.card { background: white;
+            padding: 40px 50px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            width: 100%;
+            max-width: 600px
+        }
+        h2 {
+            color: #1a1a1a;
+            font-size: 26px;
+            margin-bottom: 15px;
+        }
+        p {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+        input[type="file"] {
+            margin-bottom: 25px;
+            font-size: 15px;
+        }
+        button {
+            background-color: #0066ff;
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #0052cc;
+        }
     </style>
 </head>
 <body>
     <div class="card">
         <h2>Carga Inicial de Datos (MongoDB)</h2>
-        <p>Selecciona el archivo <strong>promociones.json</strong> para poblar la base de datos principal.</p>
+        <p>Selecciona el archivo <strong>promociones.json</strong> para la base de datos principal.</p>
         
         <form action="/cargar" method="POST" enctype="multipart/form-data">
             <input type="file" name="archivo_json" accept=".json" required><br>
