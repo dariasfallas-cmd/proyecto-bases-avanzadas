@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__)
 
-# Configuración de la conexión a MongoDB (asegúrate de tener MongoDB ejecutándose localmente)
+# Configuración de la conexión a MongoDB
 MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/")
 client = MongoClient(MONGO_URI)
 db = client["tienda_promociones_db"]
@@ -38,7 +38,7 @@ def cargar_datos():
         # Limpiar la colección existente antes de la nueva carga inicial
         promociones_collection.delete_many({})
         
-        # Insertar los datos en MongoDB (maneja listas o documentos individuales)
+        # Insertar los datos en MongoDB 
         if isinstance(datos, list):
             promociones_collection.insert_many(datos)
         else:
