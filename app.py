@@ -13,18 +13,18 @@ promociones_collection = db["promociones"]
 
 @app.route('/')
 def index():
-    return "<h1>Bienvenido al Proyecto de Bases de Datos Avanzadas</h1><p><a href='/vista-carga'>Ir a Carga Inicial de Promociones</a></p>"
+    return "<h1>Bienvenido al Proyecto de Bases de Datos Avanzadas</h1><p><a href='/vista-carga'>Ir a Gestion de Promociones</a></p>"
 
 @app.route('/vista-carga')
 def vista_carga():
-    # Renderiza la interfaz donde se subirá el JSON
+    #  interfaz donde se subirá el JSON
     return render_template('carga.html')
 
 @app.route('/cargar', methods=['POST'])
 def cargar_datos():
-    # Funcionalidad 1: Carga inicial de datos desde el JSON
+    # Carga inicial de datos desde el JSON
     if 'archivo_json' not in request.files:
-        return "No se encontró el campo del archivo en el formulario", 400
+        return "Falta el campo del archivo en la solicitud", 400
     
     archivo = request.files['archivo_json']
     
