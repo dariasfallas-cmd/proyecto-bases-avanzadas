@@ -1,0 +1,43 @@
+[
+  {
+    "id": "P001",
+    "nombre": "20% de descuento en zapatos deportivos",
+    "departamento": "Ropa",
+    "descuento": "20%",
+    "temporada": "Verano",
+    "tallas": ["37", "38", "39", "40", "41", "42"]
+  },
+  {
+    "id": "P002",
+    "nombre": "15% de descuento en audífonos inalámbricos",
+    "departamento": "Electrónica",
+    "descuento": "15%",
+    "marca": "SoundMax",
+    "garantia_meses": 12
+  },
+  {
+    "id": "P003",
+    "nombre": "30% de descuento en juegos de sábanas",
+    "departamento": "Hogar",
+    "descuento": "30%",
+    "material": "Algodón",
+    "medidas": ["Individual", "Matrimonial", "Queen"]
+  },
+  {
+    "id": "P004",
+    "nombre": "25% de descuento en juegos de construcción",
+    "departamento": "Juguetes",
+    "descuento": "25%",
+    "edad_minima": 6,
+    "cantidad_piezas": 500
+  },
+  {
+    "id": "P005",
+    "nombre": "10% de descuento en televisores",
+    "departamento": "Electrónica",
+    "descuento": "10%",
+    "marca": "VisionPlus",
+    "garantia_meses": 24,
+    "pulgadas": [43, 50, 55]
+  }
+]
