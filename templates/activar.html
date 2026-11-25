@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Activar Promoción</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            padding: 35px 45px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            width: 100%;
+            max-width: 550px;
+        }
+        h2 { color: #1a1a1a; margin-top: 0; }
+        label { display: block; margin-top: 15px; font-weight: 600; color: #333; }
+        select, input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        button {
+            width: 100%;
+            margin-top: 22px;
+            padding: 12px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover { background-color: #0052a3; }
+        .alerta {
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 18px;
+            font-weight: 500;
+        }
+        .exito { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .nav {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+        .nav a { color: #0066cc; text-decoration: none; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Activar Promoción</h2>
+
+        {% if mensaje %}
+            <div class="alerta {{ tipo_alerta }}">{{ mensaje }}</div>
+        {% endif %}
+
+        <form method="POST" action="/activar-promocion">
+            <label for="promo_id">Seleccionar promoción del catálogo:</label>
+            <select name="promo_id" id="promo_id" required>
+                <option value="">-- Elija una promoción --</option>
+                {% for p in promociones %}
+                    <option value="{{ p.id }}">{{ p.id }} - {{ p.nombre }} ({{ p.departamento }})</option>
+                {% endfor %}
+            </select>
+
+            <label for="cupones">Cantidad de cupones disponibles:</label>
+            <input type="number" name="cupones" id="cupones" min="1" placeholder="Ej: 5" required>
+
+            <label for="duracion">Duración de la promoción (en minutos):</label>
+            <input type="number" name="duracion" id="duracion" min="1" placeholder="Ej: 2" required>
+
+            <button type="submit">Activar en Redis</button>
+        </form>
+
+        <div class="nav">
+            <a href="/vista-carga">← Cargar JSON</a>
+            <a href="/promociones-activas">Ver Promociones Activas →</a>
+        </div>
+    </div>
+</body>
+</html>

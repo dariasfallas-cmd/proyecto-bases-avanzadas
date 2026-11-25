@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Promociones Activas</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            padding: 35px 45px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            width: 100%;
+            max-width: 800px;
+        }
+        h2 { color: #1a1a1a; margin-top: 0; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        th { background-color: #f8f9fa; color: #333; }
+        .badge {
+            background-color: #e6f4ea;
+            color: #137333;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+        .tiempo { color: #d93025; font-weight: 600; }
+        .vacio { text-align: center; color: #666; padding: 25px 0; }
+        .acciones {
+            margin-top: 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .btn-refrescar {
+            padding: 9px 16px;
+            background-color: #0066cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        a.link { color: #0066cc; text-decoration: none; font-weight: 600; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Promociones Vigentes (En Vivo desde Redis)</h2>
+
+        {% if activas %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Promoción</th>
+                        <th>Departamento</th>
+                        <th>Cupones Disponibles</th>
+                        <th>Tiempo Restante</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in activas %}
+                        <tr>
+                            <td><strong>{{ item.nombre }}</strong></td>
+                            <td>{{ item.departamento }}</td>
+                            <td><span class="badge">{{ item.cupones_disponibles }} disponibles</span></td>
+                            <td class="tiempo">
+                                Vence en {{ item.minutos_restantes }} min {{ item.segundos_restantes }} seg
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="vacio">No hay promociones activas en este momento.</p>
+        {% endif %}
+
+        <div class="acciones">
+            <a class="link" href="/activar-promocion">← Activar otra promoción</a>
+            <a class="btn-refrescar" href="/promociones-activas">Actualizar tiempos</a>
+        </div>
+    </div>
+</body>
+</html>
