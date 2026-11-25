@@ -1,0 +1,24 @@
+{% extends "cupones/base_cupones.html" %}
+{% block titulo %}Consulta de cupones{% endblock %}
+{% block encabezado %}Cupones obtenidos por departamento{% endblock %}
+{% block contenido %}
+{% if error %}
+<div class="msg error" role="alert">{{ error }}</div>
+{% endif %}
+<div class="panel">
+  {% if filas %}
+  <table>
+    <thead>
+      <tr><th>Departamento</th><th class="num">Total cupones obtenidos</th><th class="num"># Clientes distintos</th></tr>
+    </thead>
+    <tbody>
+      {% for f in filas %}
+      <tr><td>{{ f.departamento }}</td><td class="num">{{ f.total_cupones }}</td><td class="num">{{ f.clientes_distintos }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="suave">Aún no hay promociones cargadas. Cargue el archivo JSON primero.</p>
+  {% endif %}
+</div>
+{% endblock %}

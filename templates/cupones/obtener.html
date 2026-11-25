@@ -1,0 +1,44 @@
+{% extends "cupones/base_cupones.html" %}
+{% block titulo %}Obtener cupón{% endblock %}
+{% block encabezado %}Obtener un cupón{% endblock %}
+{% block contenido %}
+
+{% if cupon %}
+<div class="msg ok" role="status">
+  <div>Cupón entregado a <strong>{{ cupon.cliente }}</strong> para «{{ cupon.promocion }}» ({{ cupon.departamento }}).</div>
+  <div class="codigo">{{ cupon.codigo }}</div>
+  <div class="suave">Obtenido el {{ cupon.fecha_obtencion.strftime("%d/%m/%Y a las %H:%M:%S") }}.
+    A la promoción le quedan {{ restantes }} cupón{{ "" if restantes == 1 else "es" }}.</div>
+</div>
+{% endif %}
+
+{% if error %}
+<div class="msg error" role="alert">{{ error }}</div>
+{% endif %}
+
+<form method="post" class="panel">
+  <div style="margin-bottom:1.25rem">
+    <label for="cliente">Nombre del cliente</label>
+    <input type="text" id="cliente" name="cliente" value="{{ cliente }}" required autofocus>
+  </div>
+
+  <label>Promociones activas</label>
+  {% if promociones %}
+    {% for p in promociones %}
+    <div class="opcion">
+      <input type="radio" name="promocion_id" id="p-{{ p.id }}" value="{{ p.id }}" required>
+      <label for="p-{{ p.id }}">
+        {{ p.nombre }} – {{ p.departamento }}
+        <div class="suave">
+          {% if p.disponibles == 0 %}Sin cupones disponibles{% else %}{{ p.disponibles }} disponible{{ "" if p.disponibles == 1 else "s" }}{% endif %}
+          · vence en {{ p.segundos_restantes // 60 }} min {{ p.segundos_restantes % 60 }} s
+        </div>
+      </label>
+    </div>
+    {% endfor %}
+    <div style="margin-top:1.25rem"><button type="submit">Obtener cupón</button></div>
+  {% else %}
+    <p class="suave">No hay promociones activas en este momento.</p>
+  {% endif %}
+</form>
+{% endblock %}

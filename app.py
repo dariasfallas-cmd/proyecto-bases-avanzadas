@@ -5,6 +5,9 @@ import os
 
 app = Flask(__name__)
 
+from cupones.rutas import registrar_cupones
+registrar_cupones(app)
+
 # Configuración de la conexión a MongoDB
 MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/")
 client = MongoClient(MONGO_URI)
