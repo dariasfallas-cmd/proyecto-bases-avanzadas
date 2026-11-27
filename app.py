@@ -6,6 +6,10 @@ import os
 
 app = Flask(__name__)
 
+# Módulo de cupones (Persona 3): obtener cupón y consulta por departamento
+from cupones.rutas import registrar_cupones
+registrar_cupones(app)
+
 # Configuración de la conexión a MongoDB
 MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/")
 client = MongoClient(MONGO_URI)
@@ -18,7 +22,7 @@ redis_client = redis.Redis(host='localhost', port=6379, db=0, decode_responses=T
 
 @app.route('/')
 def index():
-    return "<h1>Bienvenido al Proyecto de Bases de Datos Avanzadas</h1><p><a href='/vista-carga'>1. Cargar JSON</a></p><p><a href='/activar-promocion'>2. Activar Promociones</a></p><p><a href='/promociones-activas'>3. Ver Promociones Activas</a></p>"
+    return "<h1>Bienvenido al Proyecto de Bases de Datos Avanzadas</h1><p><a href='/vista-carga'>1. Cargar JSON</a></p><p><a href='/activar-promocion'>2. Activar Promociones</a></p><p><a href='/promociones-activas'>3. Ver Promociones Activas</a></p><p><a href='/obtener-cupon'>4. Obtener Cupón</a></p><p><a href='/consulta-cupones'>5. Consultar Cupones</a></p>"
 
 
 @app.route('/vista-carga')
